@@ -1,10 +1,18 @@
 import React from 'react';
 
-function User({user, onRemove}) {
-    const {username, email, id} = user;
+function User({user, onRemove, onToggle}) {
+    const {username, email, id, active} = user;
     return (
         <div>
-            <b>{username}</b> <span>({email})</span>
+            <b style={{
+                color: active ? 'green':'black',
+                cursor: 'pointer'
+                }}
+                onClick={() => onToggle(id)}
+            >
+                {username}
+            </b> 
+            <span>({email})</span>
             <button onClick={() => onRemove(id)}>삭제</button>
         </div>
     )
@@ -14,12 +22,18 @@ function User({user, onRemove}) {
 데이터가 적고 변경될 확률이 적은 경우 인덱스 써도 오케이,
 데이터가 많고 자주 바뀌는 경우에는 고유 키값을 만들어서 렌더링 한다. */}
 
-function UserList({users, onRemove}) {
+function UserList({users, onRemove, onToggle}) {
     return (
         <div>
             {
                 users.map(
-                    user => (<User user={user} key={user.id} onRemove={onRemove} />)
+                    user => (
+                        <User 
+                            user={user} 
+                            key={user.id} 
+                            onRemove={onRemove}
+                            onToggle={onToggle}
+                        />)
                 )
             }
         </div>
