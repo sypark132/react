@@ -12,25 +12,7 @@ function User({user}) {
 데이터가 적고 변경될 확률이 적은 경우 인덱스 써도 오케이,
 데이터가 많고 자주 바뀌는 경우에는 고유 키값을 만들어서 렌더링 한다. */}
 
-function UserList() {
-    const users = [
-        {
-            id: 1,
-            username: 'seoyoon',
-            email: 'sy12@gmail.com'
-        },
-        {
-            id: 2,
-            username: 'tester',
-            email: 'tester@test.com'
-        },
-        {
-            id: 3,
-            username: 'react',
-            email: 'react@react.com'
-        }
-    ];
-
+function UserList({users}) {
     return (
         <div>
             {
