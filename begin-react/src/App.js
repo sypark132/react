@@ -84,6 +84,7 @@ function App() {
 
   const count = useMemo(() => countActiveUsers(users), [users]);
   //useMemo는 users가 바뀔 때에만 호출이 되고 그렇지 않으면
+  
   //이전에 만들어놨던 값을 재사용한다.
 
   return (

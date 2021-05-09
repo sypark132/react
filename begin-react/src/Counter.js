@@ -9,11 +9,12 @@ function Counter() {
     const onIncrease = () => {
         //업데이트 되기 전 상태를 prevNumber로 두고 함수형으로 쓸 수 있음
         //지금은 차이 없지만 나중에 성능 최적화할 때 필요
-        setNumber(prevNumber => prevNumber + 1)
+        setNumber(prevNumber => prevNumber + 1);
+
         console.log('+1');
     }
     const onDecrease = () => {
-        setNumber(number - 1)
+        setNumber(number - 1);
         console.log('-1');
     }
 
