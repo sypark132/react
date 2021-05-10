@@ -1,4 +1,4 @@
-import React, {useRef,useState, useMemo} from 'react';
+import React, {useRef,useState, useMemo, useCallback} from 'react';
 import Hello from './Hello';
 import './App.css';
 import Wrapper from './Wrapper';
@@ -16,14 +16,16 @@ function App() {
     username: '',
     email: '',
   });
+
   const {username, email} = inputs;
-  const onChange = e => {
+
+  const onChange = useCallback(e => {
     const {name, value} = e.target;
     setInputs({
       ...inputs,
       [name]: value
     });
-  };
+  }, [inputs]);
 
   const [users, setUsers] = useState([
     {
@@ -44,12 +46,6 @@ function App() {
         email: 'react@react.com',
         active: false
     },
-    {
-      id: 4,
-      username: 'sysy',
-      email: 'sy55@test.com',
-      active: true
-  }
   ]);
 
 
@@ -57,7 +53,7 @@ function App() {
   //useRef는 변수의 값이 바뀌어도 컴포넌트가 re-rendering 되지 않는다.
   const nextId = useRef(4);
 
-  const onCreate = () => {
+  const onCreate = useCallback(() => {
     const user = {
       id: nextId.current,
       username,
@@ -74,19 +70,19 @@ function App() {
     });
     console.log(nextId.current); //4
     nextId.current += 1;
-  };
+  }, [username, email, users]);
 
-  const onRemove = id => {
+  const onRemove = useCallback(id => {
     setUsers(users.filter(user => user.id !== id));
-  };
+  }, [users]);
 
-  const onToggle = (id) => {
+  const onToggle = useCallback((id) => {
     setUsers(users.map(
       user => user.id === id
         ? {...user, active: !user.active}
         : user
     ))
-  }
+  }, [users]);
 
   const count = useMemo(() => countActiveUsers(users), [users]);
   //useMemo는 users가 바뀔 때에만 호출이 되고 그렇지 않으면
